@@ -11,7 +11,7 @@ install and launch the dongle to receiver d2r tool :
 ```
 https://github.com/Orange-OpenSource/ocast-dongletv-simulator
 npm i -g
-d2r start all
+dongletv start all
 ```
 Clone and install the project :
 ```
