@@ -5,7 +5,7 @@ import { PlayerService } from './PlayerService';
 export class OCastService {
   private playerService: PlayerService;
   private TAG =  ' [OCast Receiver] ';
-  private OCAST_URL =  'ws://localhost:4433/ocast';
+  private OCAST_URL = (this.getUrlParameter('secure') === "true" ? 'wss' : 'ws') + '://localhost:4433/ocast';
   private videoElement =  document.getElementById('videoPlayer') as HTMLMediaElement;
   private imgElement =  document.getElementById('img') as HTMLMediaElement;
   private logger = Logger.getInstance();
@@ -29,6 +29,19 @@ export class OCastService {
       });
     });
   }
+
+  private getUrlParameter(name) {
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(window.location.href);
+    if (!results) {
+        return null;
+    } 
+    if (!results[2]) {
+        return '';
+    }
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+  }  
 }
 
 // tslint:disable-next-line:no-unused-expression
