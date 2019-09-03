@@ -13,7 +13,7 @@ These samples can be used to help developing your controller application based o
 
 These OCast receiver samples can be launched for test on a desktop using the [ocast-dongletv-simulator](https://github.com/Orange-OpenSource/ocast-dongletv-simulator)
 
-Each of the sample can be loaded using unsecure or secure WbeSockets.
+Each of the sample can be loaded using unsecure or secure WebSockets.
 To load the sample using secure WebSockets:
 
     http(s)://..../secure=true
