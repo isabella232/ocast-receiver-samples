@@ -1,5 +1,6 @@
 const webpack = require("webpack");
 const path = require("path");
+var argv = require('yargs').argv;
 
 let config = {
   entry: "./src/index.ts",
@@ -20,6 +21,11 @@ let config = {
       }
     ]
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      __SECURE__: argv.secure === true ? true : false
+    })
+  ],
   resolve: {
     extensions: [".tsx", ".ts", ".js"]
   }

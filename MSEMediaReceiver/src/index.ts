@@ -2,10 +2,12 @@ import { EnumMedia, Logger, OCast } from 'ocast-sdk';
 import { OrgOCastMediaChannelService } from './OcastMediaChannelService';
 import { PlayerService } from './PlayerService';
 
+declare const __SECURE__: boolean;
+
 export class OCastService {
   private playerService: PlayerService;
   private TAG =  ' [OCast Receiver] ';
-  private OCAST_URL = (this.getUrlParameter('secure') === "true" ? 'wss' : 'ws') + '://localhost:4433/ocast';
+  private OCAST_URL = ((this.getUrlParameter('secure') || __SECURE__) ? 'wss' : 'ws') + '://localhost:4433/ocast';
   private videoElement =  document.getElementById('videoPlayer') as HTMLMediaElement;
   private imgElement =  document.getElementById('img') as HTMLMediaElement;
   private logger = Logger.getInstance();

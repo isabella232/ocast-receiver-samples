@@ -12,3 +12,13 @@ All code in this repository is covered by the [Apache-2.0 license](http://www.ap
 
 ### Lint
 `npm run lint`
+
+By default, unsecure WebSockets are used. You can specify using secure WebSockets:
+- by setting 'secure' option in command line:
+
+    `npm run start -- --secure`
+
+- by setting the query string parameter 'secure' when loading the webapp:
+
+    `http(s)://.../?secure=true`
+
