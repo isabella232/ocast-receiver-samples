@@ -8,7 +8,10 @@
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Julien Le Guillant",
+  "author": {
+    "name": "Orange",
+    "url": "http://www.orange.fr"
+  },
   "devDependencies": {
     "eslint": "^6.0.1",
     "express": "^4.17.1"

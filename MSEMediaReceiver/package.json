@@ -9,7 +9,10 @@
     "build": "webpack --config ./webpack.config.js ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Julien Le Guillant - julien.leguillant@orange.com",
+  "author": {
+    "name": "Orange",
+    "url": "http://www.orange.fr"
+  },
   "devDependencies": {
     "ts-loader": "^6.0.1",
     "tslint": "^3.15.1",
