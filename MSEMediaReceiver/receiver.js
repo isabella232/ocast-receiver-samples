@@ -15374,6 +15374,7 @@ var PlayerService = /** @class */ (function () {
             this.videoPlayer.attachView(this.videoElement);
             this.videoPlayer.attachTTMLRenderingDiv(this.ttlTag);
             this.videoPlayer.setTextDefaultEnabled(false);
+            this.videoPlayer.getDebug().setLogLevel(5);
             this.videoElement.addEventListener('playing', function () {
                 _this.uiController.onPlaying();
                 _this.onPlaying();
