@@ -21,6 +21,9 @@ let config = {
       }
     ]
   },
+  optimization: {
+		minimize: false
+	},
   plugins: [
     new webpack.DefinePlugin({
       __SECURE__: argv.secure === true ? true : false
