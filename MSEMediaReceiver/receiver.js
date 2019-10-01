@@ -15214,6 +15214,16 @@ var PlayerService = /** @class */ (function () {
             case ocast_sdk_1.EnumMedia.VIDEO:
                 this.logger.info(this.TAG + 'onLoad - video.');
                 if (options.protectionData) {
+                    // Filter key system according to the (only) one provided in protectionData
+                    if (Object.keys(options.protectionData).length === 1) {
+                        var keySystemString = Object.keys(options.protectionData)[0];
+                        var keySystems = this.videoPlayer.getProtectionController().getKeySystems();
+                        keySystems = keySystems.filter(function (keySystem) {
+                            return (keySystem.systemString.indexOf(keySystemString) > 0);
+                        });
+                        this.videoPlayer.getProtectionController().setKeySystems(keySystems);
+                    }
+                    // Set protection data
                     this.videoPlayer.setProtectionData(options.protectionData);
                 }
                 this.videoPlayer.attachSource(url);
