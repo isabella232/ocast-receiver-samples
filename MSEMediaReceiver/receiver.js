@@ -15219,7 +15219,7 @@ var PlayerService = /** @class */ (function () {
                         var keySystemString = Object.keys(options.protectionData)[0];
                         var keySystems = this.videoPlayer.getProtectionController().getKeySystems();
                         keySystems = keySystems.filter(function (keySystem) {
-                            return (keySystem.systemString.indexOf(keySystemString) > 0);
+                            return (keySystem.systemString.indexOf(keySystemString) >= 0);
                         });
                         this.videoPlayer.getProtectionController().setKeySystems(keySystems);
                     }
