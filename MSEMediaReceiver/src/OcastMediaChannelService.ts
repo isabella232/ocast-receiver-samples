@@ -9,10 +9,10 @@ export class OrgOCastMediaChannelService implements IMediaNotifier {
     private playerService: PlayerService) {
   }
 
-  public onPrepare(url, title, subtitle, logo, mediaType, transferMode, autoplay, frequency) {
+  public onPrepare(url, title, subtitle, logo, mediaType, transferMode, autoplay, frequency, options) {
     this.logger.info(this.TAG + 'onPrepare(' + url + ',' + mediaType + ',' + transferMode +
       ',' + autoplay + ',' + frequency + ')');
-    return this.playerService.prepare(url, title, subtitle, logo, mediaType, autoplay).then((isOk) => {
+    return this.playerService.prepare(url, title, subtitle, logo, mediaType, autoplay, options).then((isOk) => {
       if (isOk === true) {
         return EnumError.OK;
       } else {

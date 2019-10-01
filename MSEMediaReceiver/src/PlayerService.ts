@@ -2,6 +2,8 @@ import dashjs from 'dashjs';
 import { EnumMedia, EnumTrack, Logger } from 'ocast-sdk';
 import { UIController } from './UIController';
 
+require('dashjs/build/es5/src/mss');
+
 export class PlayerService {
   private TAG = ' [PlayerService] ';
   private videoElement = document.querySelector('#videoPlayer') as HTMLVideoElement;
@@ -23,7 +25,7 @@ export class PlayerService {
     });
   }
 
-  public prepare(url, title, subtitle, logo, mediaType, autoplay) {
+  public prepare(url, title, subtitle, logo, mediaType, autoplay, options) {
     this.logger.info('this.videoPlayer ' + this.videoPlayer);
     switch (mediaType) {
       case EnumMedia.AUDIO:
@@ -34,6 +36,19 @@ export class PlayerService {
         return Promise.resolve(true);
       case EnumMedia.VIDEO:
         this.logger.info(this.TAG + 'onLoad - video.');
+        if (options.protectionData) {
+          // Filter key system according to the (only) one provided in protectionData
+          if (Object.keys(options.protectionData).length === 1) {
+            var keySystemString = Object.keys(options.protectionData)[0];
+            var keySystems = this.videoPlayer.getProtectionController().getKeySystems();
+            keySystems = keySystems.filter(keySystem => {
+                return (keySystem.systemString.indexOf(keySystemString) >= 0);
+            });
+            this.videoPlayer.getProtectionController().setKeySystems(keySystems);
+          }
+          // Set protection data
+          this.videoPlayer.setProtectionData(options.protectionData);
+        }
         this.videoPlayer.attachSource(url);
         this.videoPlayer.setAutoPlay(autoplay);
         this.mediaInfo = { title, subtitle, logo };
@@ -139,6 +154,8 @@ export class PlayerService {
       this.videoPlayer.attachView(this.videoElement);
       this.videoPlayer.attachTTMLRenderingDiv(this.ttlTag);
       this.videoPlayer.setTextDefaultEnabled(false);
+
+      this.videoPlayer.getDebug().setLogLevel(5);
 
       this.videoElement.addEventListener('playing', () => {
         this.uiController.onPlaying();
