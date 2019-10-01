@@ -15065,10 +15065,10 @@ var OrgOCastMediaChannelService = /** @class */ (function () {
         this.TAG = ' [OCastMediaChannelService] ';
         this.logger = ocast_sdk_1.Logger.getInstance();
     }
-    OrgOCastMediaChannelService.prototype.onPrepare = function (url, title, subtitle, logo, mediaType, transferMode, autoplay, frequency) {
+    OrgOCastMediaChannelService.prototype.onPrepare = function (url, title, subtitle, logo, mediaType, transferMode, autoplay, frequency, options) {
         this.logger.info(this.TAG + 'onPrepare(' + url + ',' + mediaType + ',' + transferMode +
             ',' + autoplay + ',' + frequency + ')');
-        return this.playerService.prepare(url, title, subtitle, logo, mediaType, autoplay).then(function (isOk) {
+        return this.playerService.prepare(url, title, subtitle, logo, mediaType, autoplay, options).then(function (isOk) {
             if (isOk === true) {
                 return ocast_sdk_1.EnumError.OK;
             }
